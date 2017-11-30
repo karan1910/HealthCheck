@@ -4,43 +4,77 @@ fs = require('fs');
 var config = require('./config.json');
 var request = require('superagent');
 
+let jadeConfig = {tabs : config.obj.tabs, table : {} };
+
 function updateConfig(){
-    let totalGetRequest = 0;
-    for(let i = 0; i < config.obj['full-tabs'].length; i++){
-        let curTab = config.obj['full-tabs'][i];
-        totalGetRequest += config.obj[curTab].tests.length;
-    }
-    for(let i = 0; i < config.obj['full-tabs'].length; i++){
-        let curTab = config.obj['full-tabs'][i];
-        for(let j = 0; j < config.obj[curTab].tests.length; j++){
-            let cb = function(f, res){
-                totalGetRequest--;
-                config.obj[curTab][config.obj[curTab].tests[f]] = res;
-                if(totalGetRequest === 0){
-                    proceed();
-                }
+
+    let totalRequest = 0;
+
+    for(let i = 0; i < config.obj.tabs; i++){
+        let tabName = config.obj.tabs[i];
+        let tabUnderProd = config.obj.PROD[tabName];
+        let tabUnderStaging = config.obj.STAGING[tabName];
+        for(let j = 0; j < tabUnderProd.tests.length; j++){
+            let test = tabUnderProd.tests[j];
+            if(tabUnderProd[test].hasOwnProperty('tests')){
+                totalRequest += tabUnderProd[test].tests.length;
             }
-            let testName = config.obj[curTab].tests[j];
-            request
-            .get(config.obj[curTab][testName].url)
-            .end((err, res) => {
-                cb(j, res.status);
-            });
+            else{
+                totalRequest++;
+            }
+        }
+        for(let j = 0; j < tabUnderStaging.tests.length; j++){
+            let test = tabUnderStaging.tests[j];
+            if(tabUnderStaging[test].hasOwnProperty('tests')){
+                totalRequest += tabUnderStaging[test].tests.length;
+            }
+            else{
+                totalRequest++;
+            }
+        }
+    }
+
+
+    for(let i = 0; i < config.obj.tabs; i++){
+        let tabName = config.obj.tabs[i];
+        let tabUnderProd = config.obj.PROD[tabName];
+        let tabUnderStaging = config.obj.STAGING[tabName];
+        for(let j = 0; j < tabUnderProd.tests.length; j++){
+            let test = tabUnderProd.tests[j];
+            if(tabUnderProd[test].hasOwnProperty('tests')){
+                totalRequest += tabUnderProd[test].tests.length;
+            }
+            else{
+                totalRequest++;
+            }
+        }
+        for(let j = 0; j < tabUnderStaging.tests.length; j++){
+            let test = tabUnderStaging.tests[j];
+            if(tabUnderStaging[test].hasOwnProperty('tests')){
+                totalRequest += tabUnderStaging[test].tests.length;
+            }
+            else{
+                totalRequest++;
+            }
         }
     }
 }
 
-updateConfig();
-//proceed();
+//updateConfig();
+proceed();
 function proceed(){
-    fs.readFile('static-html.jade', 'utf8', function (err, data) {
+    /*fs.readFile('static-html.jade', 'utf8', function (err, data) {
         if (err) throw err;
         var fn = jade.compile(data, {pretty : true});
         html = fn(config);
         console.log(html);
+    });*/
+    fs.readFile('index.html', function (err, data) {
+        if (err) throw err;
+        html = data
     });
     http.createServer(function (req, res) {
         res.write(html);
         res.end();
-    }).listen(8888);
+    }).listen(process.env.PORT || 8888);
 }

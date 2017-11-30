@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Service Health Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="https://image.ibb.co/d6mBv6/favicon.png">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .glyphicon-spin {
+            -webkit-animation: spin 2000ms infinite linear;
+            animation: spin 2000ms infinite linear;
+        }
+        .glyphicon{
+            color: #39B39B;
+        }
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(359deg);
+                transform: rotate(359deg);
+            }
+        }
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(359deg);
+                transform: rotate(359deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div style="margin:20px; position:relative;" class="row">
+            <div style="display:inline-block"><img src="https://image.ibb.co/ncUHv6/compro.png" alt="ComproDLS" style="height:70px"></div>
+            <div style="position:absolute; bottom:0; display:inline-block;">
+                <h3 style="margin-bottom: 0;color: chocolate;">Service Health Dashboard</h3>
+            </div>
+        </div>
+        <hr style="border: 0; background-color: #eeeeee; border-top: 3px solid #117711; height: 16px;">
+        <ul role="tablist" class="nav nav-tabs">
+            <li role="presentation"><a aria-controls="1" role="tab" data-toggle="tab" href="#COREPROD">CORE</a></li>
+            <li role="presentation"><a aria-controls="2" role="tab" data-toggle="tab" href="#CUPPROD">CUP</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" id="CORESTAGING" class="tab-pane">
+                <table style="border:1px solid #cccccc" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Status</th>
+                            <th>Refresh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-toggle="tooltip" title="Backend As A Service">BAAS</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working"></td>
+                            <td><a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Redis-Staging</td>
+                            <td><img src="https://status.aws.amazon.com/images/status3.gif" alt="Not-Working"></td>
+                            <td><a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Cassandra-Cluster-Servers</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working"></td>
+                            <td><span class="glyphicon glyphicon-refresh glyphicon-spin"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Kairos</td>
+                            <td><img src="https://status.aws.amazon.com/images/status3.gif" alt="Not-Working"></td>
+                            <td><a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Service-Auth-Travis</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working"></td>
+                            <td><a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Service-Product-Travis</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working"></td>
+                            <td><a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" id="COREPROD" class="tab-pane">
+                <table style="border:1px solid #cccccc" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-toggle="collapse" data-target=".BASS-CHILD" style="cursor:pointer">
+                            <td data-toggle="tooltip" title="Backend As A Service">BAAS</td>
+                            <td><img src="https://status.aws.amazon.com/images/status3.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></td>
+                          </tr>
+                        <tr class="collapse BASS-CHILD warning">
+                            <td data-toggle="tooltip" title="Backend As A Service" style="padding-left:5%">TOMCAT</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></td>
+                        </tr>
+                        <tr class="collapse BASS-CHILD warning">
+                            <td style="padding-left:5%">REST</td>
+                            <td><img src="https://status.aws.amazon.com/images/status3.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a>
+                            </td>
+                        </tr>
+                        <tr class="collapse BASS-CHILD warning">
+                            <td style="padding-left:5%">ES</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Redis-Prod</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spin"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Cassandra-Cluster-Servers</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                            <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Kairos</td>
+                            <td><img src="https://status.aws.amazon.com/images/status3.gif" alt="Not-Working">&nbsp;
+                            <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spin"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Service-Auth-Travis</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>Service-Product-Travis</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" id="CUPPROD" class="tab-pane">
+                <table style="border:1px solid #cccccc" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cloudant</td>
+                            <td>Cloudant is a document based NoSQL database</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr data-toggle="tooltip" title="NoSQL Database">
+                            <td>Mongosta</td>
+                            <td>MongoDB is a document based NoSQL database</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spin"></a></td>
+                        </tr>
+                        <tr>
+                            <td>S3-Backup</td>
+                            <td>amazon s3</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working">&nbsp;
+                              <a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" id="CUPSTAGING" class="tab-pane">
+                <table style="border:1px solid #cccccc" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Status</th>
+                            <th>Refresh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cloudant</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working"></td>
+                            <td><span class="glyphicon glyphicon-refresh glyphicon-spin"></span></td>
+                        </tr>
+                        <tr>
+                            <td data-toggle="tooltip" title="NoSQL Database">Mongoprod</td>
+                            <td><img src="https://status.aws.amazon.com/images/status3.gif" alt="Not-Working"></td>
+                            <td><a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                        <tr>
+                            <td>S3-Backup</td>
+                            <td><img src="https://status.aws.amazon.com/images/status0.gif" alt="Working"></td>
+                            <td><a href ="#" class="glyphicon glyphicon-refresh glyphicon-spi"></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="http://yourjavascript.com/109152181087/jquery.js"></script>
+</html> 
