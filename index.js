@@ -1,6 +1,7 @@
 var http = require('http');
 var jade = require('jade');
 fs = require('fs');
+/*
 var config = require('./config.json');
 var request = require('superagent');
 
@@ -60,7 +61,8 @@ function updateConfig(){
     }
 }
 
-//updateConfig();
+updateConfig();
+*/
 proceed();
 function proceed(){
     /*fs.readFile('static-html.jade', 'utf8', function (err, data) {
